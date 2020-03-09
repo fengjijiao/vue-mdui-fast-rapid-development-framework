@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+
 import Jquery from 'jquery'
 import App from './App.vue'
 import 'mdui/dist/css/mdui.css'
@@ -28,6 +30,21 @@ Object.defineProperty(Vue.prototype, 'bus', { value: bus })
 Object.defineProperty(Vue.prototype, 'store', { value: store })
 
 Vue.use(VueRouter)//important
+Vue.use(Vuex)
+
+const xstore = new Vuex.Store({
+    state: {
+        isSignIn: false
+    },
+    mutations: {
+        setSignStatus (state, payload) {
+            state.isSignIn = payload.isSignIn
+        }
+    }
+})
+
+//挂载this,vuex store属性
+Object.defineProperty(Vue.prototype, 'xstore', { value: xstore })
 
 const router = new VueRouter({
   routes // (缩写) 相当于 routes: routes
